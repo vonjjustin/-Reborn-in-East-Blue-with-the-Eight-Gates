@@ -5,6 +5,8 @@
 #include <limits>
 #include <vector>
 #include <thread>
+#include <chrono>
+
 using namespace std;
 
 // CONSTANTS
@@ -354,7 +356,7 @@ void TrainingLoop() {
     cout << "  END: " << playerEND << "\n";
     cout << "  EP Pool: " << fixed << setprecision(1) << playerEP_max << "\n";
     cout << "  EP Regen: " << playerEP_regen << "\n";
-    cout << "  Skills Unlocked: " << skillCount << "\n\n";
+    cout << "  Skills Unlocked: " << skillCount << "\n";
     
     playerHP_current = playerHP_max;
     playerEP_current = playerEP_max;
@@ -563,7 +565,7 @@ void BattleLoop() {
     while(playerHP_current > 0 && enemyHP_current > 0) {
         turnNumber++;
         Border();
-        cout << "=== TURN " << turnNumber << " ===\n\n";
+        cout << "\n=== TURN " << turnNumber << " ===\n\n";
         
         // Display Status
         cout << "KEIGAN: HP=" << playerHP_current << "/" << playerHP_max;
@@ -574,8 +576,7 @@ void BattleLoop() {
         if(gateState == 2) cout << "[Gate of Healing ACTIVE]\n";
         if(gateEndDebuff) cout << "[Gate End Debuff - Cannot reactivate]\n";
         
-        cout << "\n";
-        cout << "ARLONG: HP=" << enemyHP_current << "/" << enemyHP_max;
+        cout << "\nARLONG: HP=" << enemyHP_current << "/" << enemyHP_max;
         cout << " | ATK=" << enemyATK << " | END=" << enemyEND;
         
         if(enemyPhase == 0) cout << " [BASE PHASE]\n";
@@ -585,7 +586,7 @@ void BattleLoop() {
         if(enemyIsStaggered) cout << "[STAGGERED]\n";
         if(enemyIsDisarmed) cout << "[DISARMED]\n";
         
-        cout << "\n========================================\n\n";
+        Border();
         
         // Begin Turn (Regen & Upkeep)
         BeginTurn();
@@ -610,6 +611,7 @@ void BattleLoop() {
         enemyIsDisarmed = false;
         
         PressEnterToContinue();
+        cout << "\n";
     }
     
     // Determine outcome
@@ -627,7 +629,7 @@ void BeginTurn() {
         playerEP_current = playerEP_max;
     }
     
-    cout << "[EP regenerated: +" << playerEP_regen << "]\n";
+    cout << "\n[EP regenerated: +" << playerEP_regen << "]\n";
     
     // Gate Upkeep
     if(gateState == 1) {
@@ -674,7 +676,7 @@ void PlayerActionMenu(bool &turnEnded) {
     
     if(choice == 1) {
         // Basic Attack
-        int damage = ceil((double)playerATK - (double)enemyEND / 2.0);
+        int damage = ceil(playerATK - enemyEND / 2.0);
         if(damage < 1) damage = 1;
         
         enemyHP_current -= damage;
@@ -904,7 +906,7 @@ void EnemyAction() {
         cout << "Arlong fights without his weapon!\n";
     }
     
-    int damage = ceil((double)effectiveATK - (double)playerEND / 2.0);
+    int damage = ceil(effectiveATK - playerEND / 2.0);
     if(damage < 1) damage = 1;
     
     playerHP_current -= damage;
@@ -933,8 +935,8 @@ void EndGate() {
     int originalATK = playerATK;
     int originalEND = playerEND;
     
-    playerATK = ceil((double)playerATK / crashDivisor);
-    playerEND = ceil((double)playerEND / crashDivisor);
+    playerATK = ceil(playerATK / crashDivisor);
+    playerEND = ceil(playerEND / crashDivisor);
     
     cout << "[GATE CRASH PENALTY!]\n";
     cout << "[ATK: " << originalATK << " -> " << playerATK << "]\n";
@@ -1027,7 +1029,7 @@ void UpdateEnemyPhase() {
         enemyEND = 660;
         
         Border();
-        cout << "=== PHASE TRANSITION ===\n\n";
+        cout << "\n=== PHASE TRANSITION ===\n\n";
         cout << "Arlong roars in fury!\n\n";
         cout << "Arlong: \"ENOUGH! I'll tear you apart with my BARE HANDS!\"\n\n";
         cout << "[ARLONG ENTERS ENRAGED PHASE!]\n";
@@ -1041,7 +1043,7 @@ void UpdateEnemyPhase() {
         enemyEND = 600;
         
         Border();
-        cout << "=== PHASE TRANSITION ===\n\n";
+        cout << "\n=== PHASE TRANSITION ===\n\n";
         cout << "Arlong grins menacingly and reaches for his weapon.\n\n";
         cout << "Arlong: \"You've forced me to use this. Behold my KIRIBACHI!\"\n\n";
         cout << "[ARLONG DRAWS HIS KIRIBACHI!]\n";
@@ -1053,7 +1055,7 @@ void UpdateEnemyPhase() {
 void ShowEnding(bool win) {
     if(win) {
         Border();
-        cout << "=== VICTORY ===\n\n";
+        cout << "\n=== VICTORY ===\n\n";
         cout << "Arlong crashes to the ground, defeated.\n\n";
         cout << "Arlong (weakly): \"Impossible... a human... defeated me...?\"\n\n";
         cout << "Keigan stands over him, breathing heavily.\n\n";
@@ -1067,7 +1069,7 @@ void ShowEnding(bool win) {
         
         // Act 4: Freedom
         Border();
-        cout << "=== ACT 4: COCOYASHI'S FREEDOM ===\n\n";
+        cout << "\n=== ACT 4: COCOYASHI'S FREEDOM ===\n\n";
         cout << "The villagers of Cocoyashi pour out from their homes.\n";
         cout << "Laughter and tears mix as they celebrate their liberation.\n\n";
         cout << "Keigan collapses, his body drained from the battle.\n";
@@ -1080,7 +1082,7 @@ void ShowEnding(bool win) {
         
         // Reunion
         Border();
-        cout << "=== THE NEXT MORNING ===\n\n";
+        cout << "\n=== THE NEXT MORNING ===\n\n";
         cout << "At Bell-mere's grave, Nami and Keigan stand side by side.\n";
         cout << "Nojiko and Genzo watch from nearby, smiling.\n\n";
         cout << "Nami places tangerine blossoms on the grave.\n";
@@ -1092,7 +1094,7 @@ void ShowEnding(bool win) {
         
         // Recruitment
         Border();
-        cout << "=== THREE DAYS LATER ===\n\n";
+        cout << "\n=== THREE DAYS LATER ===\n\n";
         cout << "At the docks, the Going Merry prepares to set sail.\n\n";
         cout << "Luffy turns to Keigan with his trademark grin.\n\n";
         cout << "Luffy: \"Oi, Keigan! You're strong - come with us!\"\n\n";
@@ -1108,7 +1110,7 @@ void ShowEnding(bool win) {
         
         // Bounty Reveal
         Border();
-        cout << "=== DAYS LATER - ABOARD THE GOING MERRY ===\n\n";
+        cout << "\n=== DAYS LATER - ABOARD THE GOING MERRY ===\n\n";
         cout << "Nami lounges on deck, reading the newspaper.\n";
         cout << "Two wanted posters flutter loose.\n\n";
         cout << "Keigan catches them before they hit the floor.\n";
@@ -1127,7 +1129,7 @@ void ShowEnding(bool win) {
     } else {
         // Alternate Ending - The Loop
         Border();
-        cout << "=== DEFEAT ===\n\n";
+        cout << "\n=== DEFEAT ===\n\n";
         cout << "Keigan falls to his knees, vision blurring.\n\n";
         cout << "Arlong (laughing): \"Still weak! Still human!\"\n\n";
         cout << "Arlong grabs Keigan and hurls him into the sea once more.\n\n";
@@ -1136,14 +1138,14 @@ void ShowEnding(bool win) {
         PressEnterToContinue();
         
         Border();
-        cout << "=== ??? ===\n\n";
+        cout << "\n=== ??? ===\n\n";
         cout << "...\n\n";
         cout << "......\n\n";
         cout << ".........\n\n";
         PressEnterToContinue();
         
         Border();
-        cout << "When Keigan's eyes open, he's standing in front of Bell-mere's house.\n\n";
+        cout << "\nWhen Keigan's eyes open, he's standing in front of Bell-mere's house.\n\n";
         cout << "The village is whole. Arlong never came.\n";
         cout << "Yet a heavy dread lingers in his heart.\n\n";
         cout << "Keigan (to himself): \"Was it... all a dream?\"\n";
