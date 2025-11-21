@@ -61,7 +61,7 @@ bool disarmsKiribachi[MAX_SKILLS];
 int skillCount = 0;
 
 // STATUS ARRAYS (MAX 5 STATUSES)
-string NAM[5];
+string statusName[5];
 int statusTurnsLeft[5];
 double statusATKDivisor[5];
 double statusENDDivisor[5];
@@ -75,7 +75,7 @@ bool hasChainHandling = false;
 bool hasFrontLotusUsed = false;
 bool gateEndDebuff = false;
 
-// Training history [5]: HP, ATK, END, EP Pool, EP Regen, Self-Discovery
+// Training history [6]: HP, ATK, END, EP Pool, EP Regen, Self-Discovery
 int trainingHistory[6] = {0, 0, 0, 0, 0, 0};
 
 // FUNCTIONS DECLARATION
@@ -117,6 +117,7 @@ int main() {
     // Act 3: Battle at Arlong Park
     StartBattle();
 
+    // Ask the user to play again and restart the whole game
     cout << "\n\nPlay again? (1 = Yes, 0 = No): ";
     int playAgain;
     cin >> playAgain;
@@ -185,7 +186,7 @@ void Loading()
     }
 
     // After finishing, clear the whole line
-    cout << '\r' << string(20, ' ') << '\r';  // overwrite with spaces, then return cursor
+    cout << '\r' << string(20, ' ') << '\r';
 }
 
 void DisplayMainMenu() {
@@ -676,7 +677,7 @@ void PlayerActionMenu(bool &turnEnded) {
     
     if(choice == 1) {
         // Basic Attack
-        int damage = ceil(playerATK - enemyEND / 2.0);
+        int damage = ceil((playerATK - enemyEND) / 2.0);
         if(damage < 1) damage = 1;
         
         enemyHP_current -= damage;
@@ -906,7 +907,7 @@ void EnemyAction() {
         cout << "Arlong fights without his weapon!\n";
     }
     
-    int damage = ceil(effectiveATK - playerEND / 2.0);
+    int damage = ceil((effectiveATK - playerEND) / 2.0);
     if(damage < 1) damage = 1;
     
     playerHP_current -= damage;
@@ -939,17 +940,18 @@ void EndGate() {
     playerEND = ceil(playerEND / crashDivisor);
     
     cout << "[GATE CRASH PENALTY!]\n";
-    cout << "[ATK: " << originalATK << " -> " << playerATK << "]\n";
-    cout << "[END: " << originalEND << " -> " << playerEND << "]\n";
+    cout << "[ATK: " << originalATK << " -> " << playerATK << " (÷" << crashDivisor << ")]\n";
+    cout << "[END: " << originalEND << " -> " << playerEND << " (÷" << crashDivisor << ")]\n";
     cout << "[Effect lasts 1 turn]\n";
     
     // Apply Gate End Debuff
     gateEndDebuff = true;
-    cout << "[Gate End Debuff applied - Cannot reactivate gates until EP recovers]\n";
+    int requiredEP = ceil(1.5 * (hasGateMastery ? G1_CAST_COST_MASTERY : G1_CAST_COST));
+    cout << "[Gate End Debuff applied - Cannot reactivate until EP ≥ " << requiredEP << "]\n";
     
     // Add status to restore stats next turn
     if(statusCount < 5) {
-        NAM[statusCount] = "Gate Crash";
+        statusName[statusCount] = "Gate Crash";
         statusTurnsLeft[statusCount] = 1;
         statusATKDivisor[statusCount] = crashDivisor;
         statusENDDivisor[statusCount] = crashDivisor;
@@ -975,7 +977,7 @@ void ApplyDamage(double atkMult, double endPierce, int &damageDealt) {
     double effectiveEND = enemyEND * (1.0 - endPierce);
     
     // Damage formula
-    damageDealt = ceil(effectiveATK - effectiveEND / 2.0);
+    damageDealt = ceil((effectiveATK - effectiveEND) / 2.0);
     if(damageDealt < 1) damageDealt = 1;
     
     enemyHP_current -= damageDealt;
@@ -996,7 +998,7 @@ void TickCooldownsAndStatuses() {
             statusTurnsLeft[i]--;
             
             // If Gate Crash status expires, restore stats
-            if(statusTurnsLeft[i] == 0 && NAM[i] == "Gate Crash") {
+            if(statusTurnsLeft[i] == 0 && statusName[i] == "Gate Crash") {
                 // Restore ATK and END
                 playerATK = ceil((double)playerATK * statusATKDivisor[i]);
                 playerEND = ceil((double)playerEND * statusENDDivisor[i]);
@@ -1009,7 +1011,7 @@ void TickCooldownsAndStatuses() {
     int newCount = 0;
     for(int i = 0; i < statusCount; i++) {
         if(statusTurnsLeft[i] > 0) {
-            NAM[newCount] = NAM[i];
+            statusName[newCount] = statusName[i];
             statusTurnsLeft[newCount] = statusTurnsLeft[i];
             statusATKDivisor[newCount] = statusATKDivisor[i];
             statusENDDivisor[newCount] = statusENDDivisor[i];
@@ -1034,8 +1036,10 @@ void UpdateEnemyPhase() {
         cout << "Arlong: \"ENOUGH! I'll tear you apart with my BARE HANDS!\"\n\n";
         cout << "[ARLONG ENTERS ENRAGED PHASE!]\n";
         cout << "[ATK increased to 600!]\n";
-        cout << "[END increased to 660!]\n\n";
+        cout << "[END increased to 660!]\n";
+        Border();
         PressEnterToContinue();
+        cout << "\n";
         
     } else if(enemyHP_current <= ARLONG_PHASE2_THRESHOLD && enemyPhase < 1) {
         enemyPhase = 1;
@@ -1047,7 +1051,8 @@ void UpdateEnemyPhase() {
         cout << "Arlong grins menacingly and reaches for his weapon.\n\n";
         cout << "Arlong: \"You've forced me to use this. Behold my KIRIBACHI!\"\n\n";
         cout << "[ARLONG DRAWS HIS KIRIBACHI!]\n";
-        cout << "[ATK increased to 550!]\n\n";
+        cout << "[ATK increased to 550!]\n";
+        Border();
         PressEnterToContinue();
     }
 }
@@ -1135,13 +1140,6 @@ void ShowEnding(bool win) {
         cout << "Arlong grabs Keigan and hurls him into the sea once more.\n\n";
         cout << "Keigan: \"No... not again...\"\n\n";
         cout << "The water engulfs him. Darkness takes over.\n\n";
-        PressEnterToContinue();
-        
-        Border();
-        cout << "\n=== ??? ===\n\n";
-        cout << "...\n\n";
-        cout << "......\n\n";
-        cout << ".........\n\n";
         PressEnterToContinue();
         
         Border();
