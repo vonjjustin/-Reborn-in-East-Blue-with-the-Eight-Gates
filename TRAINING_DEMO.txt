@@ -1,0 +1,300 @@
+====================================================================
+TRAINING DEMONSTRATION
+Sample 48-Turn Training Session
+====================================================================
+
+STRATEGY: Balanced Build with Focus on Self-Discovery and Combat Stats
+Goal: Unlock all 8 skills while maintaining survivability
+
+====================================================================
+TRAINING PROGRESS
+Turns Remaining: 48 / 48
+
+Current Stats:
+  HP: 50
+  ATK: 10
+  END: 15
+  EP Pool: 5.0
+  EP Regen: 0.0
+
+Training History:
+  HP Sessions: 0
+  ATK Sessions: 0
+  END Sessions: 0
+  EP Sessions: 0
+  Self-Discovery: 0
+====================================================================
+Year 1, Month 1-2
+
+Choose your training focus:
+1. HP Training
+2. ATK Training
+3. END Training
+4. EP Training
+5. Self-Discovery (Unlock Skills)
+Enter your choice: 5
+
+[Preview] You will unlock: Gate of Opening (G1).
+
+Confirm this training?
+1 = Yes
+2 = No, choose again
+Enter your choice: 1
+
+[Unlocked: Gate of Opening (G1)!]
+
+Training session complete!
+
+--------------------------------------------------------------------
+
+TURN 2: Year 1, Month 3-4
+Choose: 2 (ATK Training)
+[Preview] ATK will increase by 11.
+[ATK increased by 11!]
+New ATK: 21
+
+--------------------------------------------------------------------
+
+TURN 3: Year 1, Month 5-6
+Choose: 3 (END Training)
+[Preview] END will increase by 15.
+[END increased by 15!]
+New END: 30
+
+--------------------------------------------------------------------
+
+TURN 4: Year 1, Month 7-8
+Choose: 4 (EP Training)
+[Preview] EP Pool will increase by 15.
+[Preview] EP Regen will increase by 2.5.
+[EP Pool increased by 15!]
+[EP Regen increased by 2.5!]
+New EP Pool: 20.0
+New EP Regen: 2.5
+
+--------------------------------------------------------------------
+
+TURN 5: Year 1, Month 9-10
+Choose: 5 (Self-Discovery)
+[Unlocked: Chain Handling!]
+
+--------------------------------------------------------------------
+
+TURN 6: Year 1, Month 11-12
+Choose: 1 (HP Training)
+[Preview] HP will increase by 21.
+[HP increased by 21!]
+New HP: 71
+
+====================================================================
+YEAR 1 COMPLETE - Status Check
+====================================================================
+HP: 71
+ATK: 21
+END: 30
+EP Pool: 20.0
+EP Regen: 2.5
+Skills: Gate of Opening, Chain Handling
+====================================================================
+
+--------------------------------------------------------------------
+TURN 7-12: Year 2 (Pattern: ATK, END, EP, SD, ATK, HP)
+--------------------------------------------------------------------
+
+Turn 7: ATK Training → +13 (ATK: 34)
+Turn 8: END Training → +18 (END: 48)
+Turn 9: EP Training → +18 Pool, +3.0 Regen (EP: 38.0/5.5)
+Turn 10: Self-Discovery → Unlocked Kei-ga-n Barrage!
+Turn 11: ATK Training → +15 (ATK: 49)
+Turn 12: HP Training → +25 (HP: 96)
+
+====================================================================
+YEAR 2 COMPLETE - Status Check
+====================================================================
+HP: 96
+ATK: 49
+END: 48
+EP Pool: 38.0
+EP Regen: 5.5
+Skills: Gate of Opening, Chain Handling, Kei-ga-n Barrage
+====================================================================
+
+--------------------------------------------------------------------
+TURN 13-18: Year 3
+--------------------------------------------------------------------
+
+Turn 13: END Training → +21 (END: 69)
+Turn 14: ATK Training → +17 (ATK: 66)
+Turn 15: EP Training → +21 Pool, +3.5 Regen (EP: 59.0/9.0)
+Turn 16: Self-Discovery → Unlocked Front Lotus (Omote Renge)!
+Turn 17: HP Training → +29 (HP: 125)
+Turn 18: ATK Training → +19 (ATK: 85)
+
+====================================================================
+YEAR 3 COMPLETE - Status Check
+====================================================================
+HP: 125
+ATK: 85
+END: 69
+EP Pool: 59.0
+EP Regen: 9.0
+Skills: 4 unlocked (including Front Lotus)
+====================================================================
+
+--------------------------------------------------------------------
+TURN 19-24: Year 4
+--------------------------------------------------------------------
+
+Turn 19: END Training → +24 (END: 93)
+Turn 20: EP Training → +24 Pool, +4.0 Regen (EP: 83.0/13.0)
+Turn 21: Self-Discovery → Unlocked Gate Mastery!
+Turn 22: ATK Training → +21 (ATK: 106)
+Turn 23: HP Training → +33 (HP: 158)
+Turn 24: END Training → +27 (END: 120)
+
+====================================================================
+YEAR 4 COMPLETE - Status Check
+====================================================================
+HP: 158
+ATK: 106
+END: 120
+EP Pool: 83.0
+EP Regen: 13.0
+Special: Gate Mastery unlocked! (G1 cost reduced: 35→30, upkeep 7→5)
+====================================================================
+
+--------------------------------------------------------------------
+TURN 25-30: Year 5
+--------------------------------------------------------------------
+
+Turn 25: ATK Training → +23 (ATK: 129)
+Turn 26: EP Training → +27 Pool, +4.5 Regen (EP: 110.0/17.5)
+Turn 27: Self-Discovery → Unlocked Gate of Healing (G2)!
+Turn 28: ATK Training → +25 (ATK: 154)
+Turn 29: HP Training → +37 (HP: 195)
+Turn 30: END Training → +30 (END: 150)
+
+====================================================================
+YEAR 5 COMPLETE - Status Check
+====================================================================
+HP: 195
+ATK: 154
+END: 150
+EP Pool: 110.0
+EP Regen: 17.5
+Skills: 6 unlocked (including G2)
+====================================================================
+
+--------------------------------------------------------------------
+TURN 31-36: Year 6
+--------------------------------------------------------------------
+
+Turn 31: ATK Training → +27 (ATK: 181)
+Turn 32: EP Training → +30 Pool, +5.0 Regen (EP: 140.0/22.5)
+Turn 33: Self-Discovery → Unlocked Chain Barrage!
+Turn 34: ATK Training → +29 (ATK: 210)
+Turn 35: HP Training → +41 (HP: 236)
+Turn 36: END Training → +33 (END: 183)
+
+====================================================================
+YEAR 6 COMPLETE - Status Check
+====================================================================
+HP: 236
+ATK: 210
+END: 183
+EP Pool: 140.0
+EP Regen: 22.5
+Skills: 7 unlocked
+====================================================================
+
+--------------------------------------------------------------------
+TURN 37-42: Year 7
+--------------------------------------------------------------------
+
+Turn 37: ATK Training → +31 (ATK: 241)
+Turn 38: EP Training → +33 Pool, +5.5 Regen (EP: 173.0/28.0)
+Turn 39: Self-Discovery → Unlocked Reverse Lotus (Ura Renge)!
+Turn 40: ATK Training → +33 (ATK: 274)
+Turn 41: HP Training → +45 (HP: 281)
+Turn 42: END Training → +36 (END: 219)
+
+====================================================================
+YEAR 7 COMPLETE - Status Check
+====================================================================
+HP: 281
+ATK: 274
+END: 219
+EP Pool: 173.0
+EP Regen: 28.0
+Skills: ALL 8 SKILLS UNLOCKED!
+====================================================================
+
+--------------------------------------------------------------------
+TURN 43-48: Year 8 (Final Push)
+--------------------------------------------------------------------
+
+Turn 43: ATK Training → +35 (ATK: 309)
+Turn 44: HP Training → +49 (HP: 330)
+Turn 45: END Training → +39 (END: 258)
+Turn 46: ATK Training → +37 (ATK: 346)
+Turn 47: EP Training → +36 Pool, +6.0 Regen (EP: 209.0/34.0)
+Turn 48: ATK Training → +39 (ATK: 385)
+
+====================================================================
+
+TRAINING COMPLETE
+
+Eight years have passed...
+Keigan has transformed from a broken boy into a warrior.
+
+Final Stats:
+  HP: 330
+  ATK: 385
+  END: 258
+  EP Pool: 209.0
+  EP Regen: 34.0
+  Skills Unlocked: 8
+
+====================================================================
+FINAL TRAINING BREAKDOWN
+====================================================================
+
+Total Sessions by Category:
+  HP Training: 6 sessions
+  ATK Training: 18 sessions
+  END Training: 9 sessions
+  EP Training: 7 sessions
+  Self-Discovery: 8 sessions (ALL SKILLS UNLOCKED)
+
+Total Stat Gains:
+  HP: +280 (50 → 330)
+  ATK: +375 (10 → 385)
+  END: +243 (15 → 258)
+  EP Pool: +204.0 (5.0 → 209.0)
+  EP Regen: +34.0 (0.0 → 34.0)
+
+Skills Unlocked:
+  1. Gate of Opening (G1)
+  2. Chain Handling (Passive)
+  3. Kei-ga-n Barrage
+  4. Front Lotus (Omote Renge)
+  5. Gate Mastery (Passive)
+  6. Gate of Healing (G2)
+  7. Chain Barrage
+  8. Reverse Lotus (Ura Renge)
+
+====================================================================
+
+ANALYSIS: This build prioritizes offense (18 ATK sessions) while
+maintaining balanced defense and EP economy. All 8 skills unlocked
+by Turn 39 allows maximum flexibility in the final battle.
+
+Expected Performance vs Arlong:
+- Can activate G2 consistently (45 EP cost < 209 pool)
+- Sustain G2 for ~16 turns (209 EP / 9 upkeep - regen offset)
+- High damage output with Reverse Lotus
+- Sufficient survivability with 330 HP
+
+VIABILITY RATING: ★★★★★ (Optimal Build)
+
+====================================================================
