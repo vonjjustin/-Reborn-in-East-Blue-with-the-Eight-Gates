@@ -25,82 +25,17 @@ Training History:
   EP Sessions: 0
   Self-Discovery: 0
 ====================================================================
-Year 1, Month 1-2
 
-Choose your training focus:
-1. HP Training
-2. ATK Training
-3. END Training
-4. EP Training
-5. Self-Discovery (Unlock Skills)
-Enter your choice: 5
+--------------------------------------------------------------------
+TURN 1-6: Year 1
+--------------------------------------------------------------------
 
-[Preview] You will unlock: Gate of Opening (G1).
-
-Confirm this training?
-1 = Yes
-2 = No, choose again
-Enter your choice: 1
-
-[Unlocked: Gate of Opening (G1)!]
-
-Training session complete!
-
-====================================================================
-TURN 2: Year 1, Month 3-4
-====================================================================
-Choose: 2 (ATK Training)
-[Preview] ATK will increase by 11.
-New ATK: 21
-
-[ATK increased by 11!]
-
-Training session complete!
-
-====================================================================
-TURN 3: Year 1, Month 5-6
-====================================================================
-Choose: 3 (END Training)
-[Preview] END will increase by 15.
-New END: 30
-
-[END increased by 15!]
-
-Training session complete!
-
-====================================================================
-TURN 4: Year 1, Month 7-8
-====================================================================
-Choose: 4 (EP Training)
-[Preview] EP Pool will increase by 15.
-[Preview] EP Regen will increase by 2.5.
-New EP Pool: 20.0
-New EP Regen: 2.5
-
-[EP Pool increased by 15!]
-[EP Regen increased by 2.5!]
-
-Training session complete!
-
-====================================================================
-TURN 5: Year 1, Month 9-10
-====================================================================
-Choose: 5 (Self-Discovery)
-
-[Unlocked: Chain Handling!]
-
-Training session complete!
-
-====================================================================
-TURN 6: Year 1, Month 11-12
-====================================================================
-Choose: 2 (ATK Training)
-[Preview] ATK will increase by 13.
-New ATK: 34
-
-[ATK increased by 13!]
-
-Training session complete!
+Turn 1: Self-Discovery → Unlocked Gate of Opening!
+Turn 2: ATK Training → +11 (ATK: 21)
+Turn 3: END Training → +15 (END: 30)
+Turn 4: EP Training → +15 Pool, +2.5 Regen (EP: 20.0/2.5)
+Turn 5: Self-Discovery → Unlocked Chain Handling!
+Turn 6: ATK Training → +13 (ATK: 34)
 
 ====================================================================
 YEAR 1 COMPLETE - Status Check
