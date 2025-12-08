@@ -261,5 +261,3 @@ Expected Performance:
 - Highly efficient glass cannon
 
 VIABILITY RATING: ★★★★★ (Optimal execution required)
-
-====================================================================
