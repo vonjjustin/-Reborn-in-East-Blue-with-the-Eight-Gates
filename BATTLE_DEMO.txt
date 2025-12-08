@@ -1,68 +1,66 @@
 ====================================================================
 BATTLE DEMONSTRATION
 Keigan vs. Arlong - VICTORY SCENARIO
-Glass Cannon Tank Build (0 HP Training)
+Actual Gameplay Stats
 ====================================================================
 
 Pre-Battle Status:
-  Keigan: HP=50/50, ATK=469, END=615, EP=173.0/173.0, EP Regen=28.0
+  Keigan: HP=50/50, ATK=610, END=615, EP=83.0/83.0, EP Regen=13.0
   Arlong: HP=2500/2500, ATK=520, END=600
   
-Skills Available:
-  1. Gate of Opening (G1) - EP: 30
+Skills Available (7 total):
+  1. Gate of Opening (G1) - EP: 35
   2. Chain Handling (Passive)
   3. Kei-ga-n Barrage - EP: 12, CD: 2
   4. Front Lotus (Omote Renge) - EP: 13, Requires: G1 + Chains
-  5. Gate Mastery (Passive)
-  6. Gate of Healing (G2) - EP: 45
-  7. Chain Barrage - EP: 14, CD: 2, Requires: Chains
+  5. Gate of Opening - Mastery (Passive)
+  6. Gate of Healing (G2) - EP: 45, Requires: G1 Mastery + 10 EP
+  7. Chain Barrage (EP: 14)
   8. Reverse Lotus (Ura Renge) - EP: 25, CD: 5, Requires: G1 + Front Lotus
 
-Strategy: Use high END to minimize damage, activate G2 immediately,
-          use stagger effects to skip enemy turns, end battle quickly.
+Strategy: Activate G2, use Front Lotus for stagger, finish with Reverse Lotus
 
-====================================================================
 ====================================================================
 TURN 1
 ====================================================================
 
-KEIGAN: HP=50/50 | EP=173.0/173.0 | ATK=469 | END=615
+KEIGAN: HP=50/50 | EP=83.0/83.0 | ATK=610 | END=615
 
 ARLONG: HP=2500/2500 | ATK=520 | END=600 [BASE PHASE]
 
 ====================================================================
 
-[EP regenerated: +28.0]
-EP = 173.0 + 28.0 = 201.0 (capped at max)
-EP = 173.0
+[EP regenerated: +13.0]
+EP = 83.0 + 13.0 = 96.0 (capped at max)
+EP = 83.0
 
 Choose your action:
 1. Basic Attack
 2. Use Skill
 3. Toggle Gate
-Enter your choice: 2
+Enter your choice (1-3): 2
 
 Available Skills:
-1. Gate of Opening (G1) - EP: 30
-2. Chain Handling (Passive)
-3. Kei-ga-n Barrage - EP: 12, CD: 2
-4. Front Lotus (Omote Renge) - EP: 13
-5. Gate Mastery (Passive)
-6. Gate of Healing (G2) - EP: 45
-7. Chain Barrage - EP: 14, CD: 2
-8. Reverse Lotus (Ura Renge) - EP: 25, CD: 5
+1. Gate of Opening (G1) (EP: 35)
+2. Chain Handling (EP: 0)
+3. Kei-ga-n Barrage (EP: 12)
+4. Front Lotus (Omote Renge) (EP: 13)
+5. Gate of Opening - Mastery (EP: 0)
+6. Gate of Healing (G2) (EP: 45)
+7. Chain Barrage (EP: 14)
+8. Reverse Lotus (Ura Renge) (EP: 25)
 0. Cancel
-Select skill: 6
+Select skill: 5
 
-Keigan uses Gate of Healing (G2)!
+Keigan 'Kei' Lee uses Gate of Healing (G2)!
 [-45 EP]
 
 [GATE OF HEALING ACTIVATED!]
 [ATK multiplied by 2.2!]
 
-Effective ATK: 469 × 2.2 = 1031.8
+Effective ATK: 610 × 2.2 = 1342
 
-EP = 128.0
+EP = 38.0
 
 --- ARLONG'S TURN ---
 Arlong punches with brutal force!
@@ -76,53 +74,57 @@ Keigan: HP=49/50
 TURN 2
 ====================================================================
 
-KEIGAN: HP=49/50 | EP=128.0/173.0 | ATK=469 | END=615
+KEIGAN: HP=49/50 | EP=38.0/83.0 | ATK=610 | END=615
 [Gate of Healing ACTIVE]
 
 ARLONG: HP=2500/2500 | ATK=520 | END=600 [BASE PHASE]
 
 ====================================================================
 
-[EP regenerated: +28.0]
-EP = 128.0 + 28.0 = 156.0
+[EP regenerated: +13.0]
+EP = 38.0 + 13.0 = 51.0
 [Gate of Healing upkeep: -9 EP]
-EP = 147.0
+EP = 42.0
 
 Choose your action:
 1. Basic Attack
 2. Use Skill
 3. Toggle Gate
-Enter your choice: 2
+Enter your choice (1-3): 2
 
 Available Skills:
-3. Kei-ga-n Barrage - EP: 12, CD: 2
-4. Front Lotus (Omote Renge) - EP: 13
-7. Chain Barrage - EP: 14, CD: 2
-8. Reverse Lotus (Ura Renge) - EP: 25, CD: 5
-
+1. Gate of Opening (G1) (EP: 35)
+2. Chain Handling (EP: 0)
+3. Kei-ga-n Barrage (EP: 12)
+4. Front Lotus (Omote Renge) (EP: 13)
+5. Gate of Opening - Mastery (EP: 0)
+6. Gate of Healing (G2) (EP: 45)
+7. Chain Barrage (EP: 14)
+8. Reverse Lotus (Ura Renge) (EP: 25)
+0. Cancel
 Select skill: 4
 
-Keigan uses Front Lotus (Omote Renge)!
+Keigan 'Kei' Lee uses Front Lotus (Omote Renge)!
 [-13 EP]
 
 Calculation per hit:
-- Base ATK: 469
-- G2 Multiplier: 469 × 2.2 = 1031.8
-- Skill Multiplier: 1031.8 × 0.95 = 980.21
+- Base ATK: 610
+- G2 Multiplier: 610 × 2.2 = 1342
+- Skill Multiplier: 1342 × 0.95 = 1274.9
 - END Pierce (30%): 600 × 0.70 = 420
-- Damage: ⌈(980.21 - 420) / 2⌉ = ⌈560.21 / 2⌉ = 281
+- Damage: ⌈(1274.9 - 420) / 2⌉ = ⌈854.9 / 2⌉ = 428
 
-Hit 1: 281 damage!
-Hit 2: 281 damage!
+Hit 1: 428 damage!
+Hit 2: 428 damage!
 
-Total damage: 562
+Total damage: 856
 
 [Arlong is STAGGERED!]
-[Arlong's Kiribachi is DISARMED!] (Not applicable yet)
+[Arlong's Kiribachi is DISARMED!] (Not applicable in Base Phase)
 
-Arlong: HP=1938/2500
+Arlong: HP=1644/2500
 
-EP = 134.0
+EP = 29.0
 
 --- ARLONG'S TURN ---
 Arlong is STAGGERED and cannot attack this turn!
@@ -131,169 +133,147 @@ Arlong is STAGGERED and cannot attack this turn!
 TURN 3
 ====================================================================
 
-KEIGAN: HP=49/50 | EP=134.0/173.0 | ATK=469 | END=615
+KEIGAN: HP=49/50 | EP=29.0/83.0 | ATK=610 | END=615
 [Gate of Healing ACTIVE]
 
-ARLONG: HP=1938/2500 | ATK=520 | END=600 [BASE PHASE]
+ARLONG: HP=1644/2500 | ATK=520 | END=600 [BASE PHASE]
 
 ====================================================================
 
-[EP regenerated: +28.0]
-EP = 134.0 + 28.0 = 162.0
+[EP regenerated: +13.0]
+EP = 29.0 + 13.0 = 42.0
 [Gate of Healing upkeep: -9 EP]
-EP = 153.0
+EP = 33.0
 
 Choose your action:
 1. Basic Attack
 2. Use Skill
 3. Toggle Gate
-Enter your choice: 2
+Enter your choice (1-3): 2
 
 Available Skills:
-3. Kei-ga-n Barrage - EP: 12, CD: 1
-4. Front Lotus (Omote Renge) [Used - Front Lotus requirement satisfied]
-7. Chain Barrage - EP: 14, CD: 2
-8. Reverse Lotus (Ura Renge) - EP: 25, CD: 5 [NOW AVAILABLE]
+1. Gate of Opening (G1) (EP: 35) - NOT ENOUGH EP
+2. Chain Handling (EP: 0)
+3. Kei-ga-n Barrage (EP: 12)
+4. Front Lotus (Omote Renge) (EP: 13)
+5. Gate of Opening - Mastery (EP: 0)
+6. Gate of Healing (G2) (EP: 45) - NOT ENOUGH EP
+7. Chain Barrage (EP: 14)
+8. Reverse Lotus (Ura Renge) (EP: 25)
+0. Cancel
+Select skill: 6
 
-Select skill: 8
-
-Keigan uses Reverse Lotus (Ura Renge)!
+Keigan 'Kei' Lee uses Reverse Lotus (Ura Renge)!
 [-25 EP]
 
 Calculation per hit:
-- Base ATK: 469
-- G2 Multiplier: 469 × 2.2 = 1031.8
-- Skill Multiplier: 1031.8 × 1.25 = 1289.75
+- Base ATK: 610
+- G2 Multiplier: 610 × 2.2 = 1342
+- Skill Multiplier: 1342 × 1.25 = 1677.5
 - END Pierce (35%): 600 × 0.65 = 390
-- Damage: ⌈(1289.75 - 390) / 2⌉ = ⌈899.75 / 2⌉ = 450
+- Damage: ⌈(1677.5 - 390) / 2⌉ = ⌈1287.5 / 2⌉ = 644
 
-Hit 1: 450 damage!
-Hit 2: 450 damage!
-Hit 3: 450 damage!
-Hit 4: 450 damage!
+Hit 1: 644 damage!
+Hit 2: 644 damage!
+Hit 3: 644 damage!
+Hit 4: 644 damage!
 [G2 Bonus: +1 hit!]
-Hit 5: 450 damage!
+Hit 5: 644 damage!
 
-Total damage: 2250
+Total damage: 3220
 
 [Arlong is STAGGERED!]
 
-Arlong: HP = 1938 - 2250 = -312 → 0
+Arlong: HP = 1644 - 3220 = -1576 → 0
 
 ====================================================================
- CRITICAL HIT - ARLONG DEFEATED! 
-====================================================================
-
-Arlong crashes to the ground, unable to withstand the overwhelming
-power of Keigan's ultimate technique!
-
-Final Battle Statistics:
-- Turns to Victory: 3
-- Keigan HP Remaining: 49/50 (98%)
-- Keigan EP Remaining: 128.0/173.0 (74%)
-- Total Damage Dealt: 2812
-- Damage Taken: 1 (minimum damage from 1 hit)
-
-Arlong (collapsing): "Impossible... such power... from a human...?!"
-
+ ARLONG DEFEATED IN 3 TURNS! 
 ====================================================================
 
 VICTORY
 
 ====================================================================
-BATTLE ANALYSIS - GLASS CANNON TANK VICTORY
+BATTLE ANALYSIS - ACTUAL GAMEPLAY STATS
 ====================================================================
+
+FINAL STATS USED:
+- HP: 50/50
+- ATK: 610
+- END: 615
+- EP: 83.0/83.0
+- EP Regen: 13.0
+- Skills: 8
 
 WHY THIS BUILD SUCCEEDED:
 
-1. MAXIMUM ENDURANCE (615) - The Key Factor
-   - Reduced Arlong's 520 ATK to minimum damage (1 per hit)
-   - Formula: (520 - 615) / 2 = negative, capped at 1
-   - Effectively "immortal" against base Arlong attacks
-   - Even Phase 3 (600 ATK) would deal only 1 damage
+1. MAXIMUM ENDURANCE (615)
+   - Reduced all of Arlong's damage to 1 per hit
+   - Formula: (520 - 615) / 2 = -47.5 → minimum 1
+   - Effectively invincible with 50 HP = 50 hits survivable
+   - Even Phase 3 Arlong (600 ATK) deals only: (600-615)/2 = -7.5 → 1 damage
 
-2. MAXIMUM ATTACK (469) with G2 Multiplier
-   - G2 amplified ATK: 469 × 2.2 = 1031.8
-   - Reverse Lotus: 1031.8 × 1.25 = 1289.75 per hit
-   - 5 hits (G2 bonus) = 2250 damage in one turn
-   - Enough to finish Arlong from >1900 HP
+2. VERY HIGH ATTACK (610)
+   - G2 amplified: 610 × 2.2 = 1342
+   - Front Lotus: 1342 × 0.95 = 1274.9 → 428 per hit × 2 = 856 damage
+   - Reverse Lotus: 1342 × 1.25 = 1677.5 → 644 per hit × 5 = 3220 damage
+   - Total damage in 2 skills: 4076 (exceeds Arlong's 2500 HP)
 
-3. STAGGER MECHANICS
-   - Front Lotus created first stagger window
-   - Prevented Arlong from attacking Turn 2
-   - Reverse Lotus created second stagger window
-   - Battle ended before stagger expired
+3. SUFFICIENT EP POOL (83.0)
+   - G2 activation: -45 EP → 38 EP remaining
+   - +13 regen - 9 upkeep = +4 net per turn
+   - Turn 2: 38 + 4 = 42 EP (enough for Front Lotus -13)
+   - Turn 3: 29 + 4 = 33 EP (enough for Reverse Lotus -25)
 
-4. EP SUSTAINABILITY
-   - Started with 173 EP (sufficient for full combo)
-   - G2 activation: -45 EP
-   - Front Lotus: -13 EP
-   - Reverse Lotus: -25 EP
-   - Total spent: 83 EP (well within budget)
-   - EP regen + initial pool = no resource issues
+4. STAGGER MECHANICS
+   - Front Lotus: Created safe Turn 2
+   - Reverse Lotus: Battle ended immediately
+   - Never needed the second stagger
 
-DAMAGE BREAKDOWN:
-- Turn 1: 0 damage (activated G2)
-- Turn 2: 562 damage via Front Lotus
-- Turn 3: 2250 damage via Reverse Lotus
-- TOTAL: 2812 damage (exceeded Arlong's 2500 HP)
+COMBAT SEQUENCE:
+- Turn 1: G2 activation, took 1 damage (49/50 HP)
+- Turn 2: Front Lotus → 856 damage, stagger applied
+- Turn 3: Reverse Lotus → 3220 damage → INSTANT VICTORY
 
-DAMAGE TAKEN:
-- Turn 1: 1 damage (minimum)
-- Turn 2: 0 damage (staggered)
-- Turn 3: Battle ended
-- TOTAL: 1 damage taken
+DAMAGE SUMMARY:
+- Total damage dealt: 4076 (overkill by 1576)
+- Arlong HP: 2500
+- Damage taken: 1
+- Final HP: 49/50 (98%)
+
+EP USAGE:
+- Started: 83.0
+- Turn 1: -45 (G2) = 38.0
+- Turn 2: +13 -9 -13 (FL) = 29.0
+- Turn 3: +13 -9 -25 (RL) = 8.0
+- Remaining: 8.0 EP
 
 EFFICIENCY RATING: ★★★★★
-- 3-turn victory (optimal)
-- 98% HP remaining (near perfect)
-- No wasted actions
-- Perfect skill sequencing
+- 3-turn victory (optimal speed)
+- 98% HP preserved
+- Perfect skill execution
+- Zero wasted actions
 
 ====================================================================
 
-ALTERNATIVE VICTORY PATH (If Arlong survived Turn 3):
+KEY INSIGHTS:
 
-Turn 4: Arlong staggered, cannot attack
-- Use Chain Barrage or Kei-ga-n Barrage
-- Estimated 300-400 additional damage
+1. 610 ATK is sufficient for 3-turn victory
+2. 615 END makes player nearly immortal vs Arlong
+3. 83 EP pool is exactly enough for G2 + combo
+4. 50 HP is viable when taking only 1 damage/hit
+5. 8 skills sufficient
 
-Turn 5: Arlong attacks for 1 damage
-- Keigan HP: 48/50
-- Use Chain Barrage (off cooldown)
+MINIMUM BUILD REQUIREMENTS:
+- ATK ≥ 550 (to deal ~3500 total damage with combo)
+- END ≥ 520 (to reduce damage to 1 per hit)
+- EP ≥ 83 (exact amount for G2 + Front + Reverse)
+- Skills: G1, G2, Gate Mastery, Front Lotus, Reverse Lotus
 
-Turn 6+: Continue DPS with multi-hit skills
-- Victory guaranteed by Turn 6-7
-
-====================================================================
-
-KEY LESSONS FROM THIS BUILD:
-
-1. ✓ HP is NOT mandatory if END is maximized
-2. ✓ High END makes enemy attacks negligible
-3. ✓ High ATK with Gates = massive burst damage
-4. ✓ Stagger effects are crucial for safety
-5. ✓ Reverse Lotus is the ultimate finisher
-
-BUILD REQUIREMENTS FOR REPLICATION:
-- ATK ≥ 400 (to reach 880+ with G2 for high damage)
-- END ≥ 550 (to reduce Arlong's damage to 1-5 range)
-- EP ≥ 150 (to afford G2 + Front Lotus + Reverse Lotus)
-- All 8 Skills unlocked (especially Reverse Lotus)
-
-RISK LEVEL: MEDIUM
-Despite 50 HP, high END makes build surprisingly safe.
-Only catastrophic errors (deactivating Gate early) cause failure.
-
-====================================================================
-
-CONCLUSION:
-
-This "Glass Cannon Tank" build proves that ENDURANCE is the most
-important defensive stat, not HP. By negating enemy damage through
-high END and ending battles quickly with high ATK, Keigan can achieve
-perfect victories even with base HP.
-
-The key insight: Dead enemies deal no damage.
+This build demonstrates PERFECT stat allocation:
+- 20 ATK sessions
+- 16 END sessions  
+- 4 EP sessions
+- 8 Self-Discovery sessions
+- 0 HP sessions (unnecessary with high END)
 
 ====================================================================
