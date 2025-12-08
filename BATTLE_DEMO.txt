@@ -275,5 +275,3 @@ This build demonstrates PERFECT stat allocation:
 - 4 EP sessions
 - 8 Self-Discovery sessions
 - 0 HP sessions (unnecessary with high END)
-
-====================================================================
