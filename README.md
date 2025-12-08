@@ -77,7 +77,7 @@ Each turn represents 2 months of training. You have **48 total turns** to prepar
 2. Chain Handling (Passive)
 3. Kei-ga-n Barrage
 4. Front Lotus (Omote Renge)
-5. Gate Mastery (Passive)
+5. Gate of Opening - Mastery (Passive)
 6. Gate of Healing (G2)
 7. Chain Barrage
 8. Reverse Lotus (Ura Renge)
