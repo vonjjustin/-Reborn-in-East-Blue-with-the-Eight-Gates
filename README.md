@@ -1,7 +1,6 @@
 # Keigan's Journey: Cocoyashi Arc
+Developed by: Von Justin L. Estayani | ZC11
 
-- A text-based RPG inspired by One Piece, featuring strategic turn-based combat and a character progression system based on the Eight Inner Gates technique.
-- Developed by: Von Justin L. Estayani | ZC11
 ## Table of Contents
 - [Overview](#overview)
 - [How to Run](#how-to-run)
