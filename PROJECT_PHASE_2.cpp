@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <cmath>
+#include <cmath> 
 #include <iomanip>
 #include <limits>
 #include <thread>
@@ -10,6 +10,7 @@ using namespace std;
 
 // CONSTANTS
 const int MAX_SKILLS = 8;
+const int MAX_BATTLE_SKILLS = 4;
 const int TRAINING_TURNS = 48;
 const int G1_CAST_COST = 35;
 const int G1_TURN_COST = 7;
@@ -42,22 +43,28 @@ int enemyPhase = 0; // 0=Base, 1=Kiribachi, 2=Enraged
 bool enemyIsStaggered = false;
 bool enemyIsDisarmed = false;
 
-// SKILL DATA ARRAYS [MAX_SKILLS]
-int id[MAX_SKILLS];
-string name[MAX_SKILLS];
-int epCost[MAX_SKILLS];
-int cooldownMax[MAX_SKILLS];
-int cooldownLeft[MAX_SKILLS];
-bool requiresGate[MAX_SKILLS];
-bool g2Only[MAX_SKILLS];
-bool requiresChains[MAX_SKILLS];
-bool srequiresFrontLotusUsed[MAX_SKILLS];
-int hits[MAX_SKILLS];
-double atkMultiplier[MAX_SKILLS];
-double endPierceFactor[MAX_SKILLS];
-bool appliedStagger[MAX_SKILLS];
-bool disarmsKiribachi[MAX_SKILLS];
-int skillCount = 0;
+// SKILL DATA ARRAYS [MAX_SKILLS] - all skills 
+int skillId[MAX_SKILLS];
+string skillName[MAX_SKILLS];
+int skillEpCost[MAX_SKILLS];
+double skillAtkMultiplier[MAX_SKILLS]; 
+int skillCount = 0; // all skills
+
+// SKILL DATA ARRAYS [MAX_BATTLE_SKILLS] - battle skills only (no passives or gates)
+int id[MAX_BATTLE_SKILLS];
+string name[MAX_BATTLE_SKILLS];
+int epCost[MAX_BATTLE_SKILLS];
+int cooldownMax[MAX_BATTLE_SKILLS];
+int cooldownLeft[MAX_BATTLE_SKILLS];
+bool requiresGate[MAX_BATTLE_SKILLS];
+bool requiresChains[MAX_BATTLE_SKILLS];
+bool requiresFrontLotusUsed[MAX_BATTLE_SKILLS];
+int hits[MAX_BATTLE_SKILLS];
+double atkMultiplier[MAX_BATTLE_SKILLS];
+double endPierceFactor[MAX_BATTLE_SKILLS];
+bool appliedStagger[MAX_BATTLE_SKILLS];
+bool disarmsKiribachi[MAX_BATTLE_SKILLS];
+int battleSkillCount = 0; // skills without passives and gates
 
 // STATUS ARRAYS (MAX 5 STATUSES)
 string statusName[5];
@@ -73,6 +80,7 @@ bool hasGateMastery = false;
 bool hasChainHandling = false;
 bool hasFrontLotusUsed = false;
 bool gateEndDebuff = false;
+bool isTurnThree = false;
 
 // Training history [5]: HP, ATK, END, EP, Self-Discovery
 int trainingHistory[5] = {0, 0, 0, 0, 0};
@@ -92,6 +100,7 @@ void PreviewStatGain(int statType);
 void TrainingLoop();
 void ApplyStatGain(int statType);
 void AddSkill(int skillId);
+void AddBattleSkill(int skillId);
 void BattleLoop();
 void BeginTurn();
 void PlayerActionMenu(bool &turnEnded);
@@ -105,29 +114,20 @@ void ShowEnding(bool win);
 
 // MAIN FUNCTION
 int main() {
-    InitGame();
-    DisplayMainMenu();
-    
-    // Act 1: The Fall of Cocoyashi
-    DisplayAct1();
-    
-    // Act 2: Training Arc
-    DisplayAct2Intro();
-    TrainingLoop();
-    
-    // Act 3: Battle at Arlong Park
-    StartBattle();
-
-    // Ask the user to play again and restart the whole game
-    cout << "\n\nDo you want to play again? (1 = Yes, 0 = No): ";
-    int playAgain = GetValidChoice();
-    
-    if (playAgain == 1) {
-        main();
-    } else {
-        cout << "\nThank you for playing!\n";
-        return 0;
+    int playAgain = 1;
+    while(playAgain == 1) {
+        InitGame();
+        DisplayMainMenu();
+        DisplayAct1();
+        DisplayAct2Intro();
+        TrainingLoop();
+        StartBattle();
+        
+        cout << "\n\nDo you want to play again? (1 = Yes, 0 = No): ";
+        playAgain = GetValidChoice();
     }
+    cout << "\nThank you for playing!\n";
+    return 0;
 }
 
 // FUNCTIONS INITIALIZATION
@@ -162,19 +162,21 @@ void InitGame() {
     enemyName = "Arlong the Saw";
     enemyHP_current = ARLONG_HP_MAX;
     enemyHP_max = ARLONG_HP_MAX;
-    enemyATK = 520;
+    enemyATK = 520;     
     enemyEND = 600;
     enemyPhase = 0;
     enemyIsStaggered = false;
     enemyIsDisarmed = false;
     
     skillCount = 0;
+    battleSkillCount = 0;
     statusCount = 0;
     gateState = 0;
     hasGateMastery = false;
     hasChainHandling = false;
     hasFrontLotusUsed = false;
-    gateEndDebuff = false;
+    gateEndDebuff = false;bool 
+    isTurnThree = false;
 }
 
 void Border() {
@@ -238,7 +240,7 @@ void DisplayMainMenu() {
 void DisplayAct1() {
     Border();
     cout << "\nACT 1: THE FALL OF COCOYASHI\n";
-    Border();
+    PressEnterToContinue();
 
     cout << "\nCocoyashi Village, once peaceful, falls into darkness as Arlong and his monstrous crew arrive.\n";
     cout << "The villagers tremble as the Fishman captain declares his rule.\n\n";
@@ -274,7 +276,7 @@ void DisplayAct1() {
 void DisplayAct2Intro() {
     Border();
     cout << "\nACT 2: THE EIGHT-YEAR TRAINING ARC\n";
-    Border();
+    PressEnterToContinue();
 
     cout << "\nDrifting unconscious for days, Keigan is finally rescued by the Good Heart Pirates.\n";
     cout << "Their doctor works tirelessly to keep him alive, refusing to let the sea claim him.\n\n";
@@ -308,7 +310,7 @@ void DisplayAct2Intro() {
 void StartBattle() {
     Border();
     cout << "\nACT 3: RETURN TO COCOYASHI\n";
-    Border();
+    PressEnterToContinue();
 
     cout << "\nEight years have passed. Keigan's body has hardened, his mind sharpened, his purpose unshaken.\n";
     cout << "With Bell-mere's old headband tied to his belt, he sets sail once more-toward the life he left behind.\n\n";
@@ -492,7 +494,7 @@ void TrainingLoop() {
     cout << "  END: " << playerEND << "\n";
     cout << "  EP Pool: " << fixed << setprecision(1) << playerEP_max << "\n";
     cout << "  EP Regen: " << fixed << setprecision(1) << playerEP_regen << "\n";
-    cout << "  Skills Unlocked: " << skillCount << "\n";
+    cout << "  SD Skills Unlocked: " << skillCount << "\n";
     
     playerHP_current = playerHP_max;
     playerEP_current = playerEP_max;
@@ -541,7 +543,7 @@ void ApplyStatGain(int statType) {
             int sdCount = trainingHistory[4];
             
             if(sdCount == 1) {
-                AddSkill(1); // Gate of Opening (G1)
+                AddSkill(1); // Gate of Opening
                 cout << "\n[Unlocked: Gate of Opening (G1)!]";
             } else if(sdCount == 2) {
                 AddSkill(2); // Chain Handling
@@ -549,22 +551,26 @@ void ApplyStatGain(int statType) {
                 cout << "\n[Unlocked: Chain Handling!]";
             } else if(sdCount == 3) {
                 AddSkill(3); // Kei-ga-n Barrage
+                AddBattleSkill(1); // Count as battle skill
                 cout << "\n[Unlocked: Kei-ga-n Barrage!]";
             } else if(sdCount == 4) {
                 AddSkill(4); // Front Lotus
+                AddBattleSkill(2); // Count as battle skill
                 cout << "\n[Unlocked: Front Lotus (Omote Renge)!]";
             } else if(sdCount == 5) {
                 AddSkill(5); // Gate of Opening - Mastery
                 hasGateMastery = true;
                 cout << "\n[Unlocked: Gate of Opening - Mastery!]";
             } else if(sdCount == 6) {
-                AddSkill(6); // Gate of Healing (G2)
+                AddSkill(6); // Gate of Healing
                 cout << "\n[Unlocked: Gate of Healing (G2)!]";
             } else if(sdCount == 7) {
                 AddSkill(7); // Chain Barrage
+                AddBattleSkill(3); // Count as battle skill
                 cout << "\n[Unlocked: Chain Barrage!]";
             } else if(sdCount == 8) {
                 AddSkill(8); // Reverse Lotus
+                AddBattleSkill(4); // Count as battle skill
                 cout << "\n[Unlocked: Reverse Lotus (Ura Renge)!]";
             } else {
                 cout << "\n[Self-Discovery session completed.]";
@@ -574,52 +580,65 @@ void ApplyStatGain(int statType) {
     }
 }
 
-void AddSkill(int skillId) {
+void AddSkill(int skill) {
     if(skillCount >= MAX_SKILLS) return;
-    
     int index = skillCount;
-    id[index] = skillId;
-    cooldownLeft[index] = 0;
+    skillId[index] = skill;
     
-    switch(skillId) {
+    switch(skill) {
         case 1: // Gate of Opening
-            name[index] = "Gate of Opening (G1)";
-            epCost[index] = hasGateMastery ? G1_CAST_COST_MASTERY : G1_CAST_COST;
-            cooldownMax[index] = 0;
-            requiresGate[index] = false;
-            g2Only[index] = false;
-            requiresChains[index] = false;
-            srequiresFrontLotusUsed[index] = false;
-            hits[index] = 0;
-            atkMultiplier[index] = 1.8;
-            endPierceFactor[index] = 0;
-            appliedStagger[index] = false;
-            disarmsKiribachi[index] = false;
+            skillName[index] = "Gate of Opening (G1)";
+            skillEpCost[index] = hasGateMastery ? G1_CAST_COST_MASTERY : G1_CAST_COST;
+            skillAtkMultiplier[index] = 1.8;
             break;
             
         case 2: // Chain Handling (Passive)
-            name[index] = "Chain Handling";
-            epCost[index] = 0;
-            cooldownMax[index] = 0;
-            requiresGate[index] = false;
-            g2Only[index] = false;
-            requiresChains[index] = false;
-            srequiresFrontLotusUsed[index] = false;
-            hits[index] = 0;
-            atkMultiplier[index] = 0;
-            endPierceFactor[index] = 0;
-            appliedStagger[index] = false;
-            disarmsKiribachi[index] = false;
+            skillName[index] = "Chain Handling";
             break;
             
         case 3: // Kei-ga-n Barrage
+            skillName[index] = "Kei-ga-n Barrage";
+            break;
+            
+        case 4: // Front Lotus
+            skillName[index] = "Front Lotus (Omote Renge)";
+            break;
+        
+        case 5: // Gate of Opening - Mastery (Passive)
+            skillName[index] = "Gate of Opening - Mastery";
+            break;
+
+        case 6: // Gate of Healing
+            skillName[index] = "Gate of Healing (G2)";
+            skillEpCost[index] = G2_CAST_COST;
+            skillAtkMultiplier[index] = 2.2;
+            break;
+            
+        case 7: // Chain Barrage
+            skillName[index] = "Chain Barrage";
+            break;
+            
+        case 8: // Reverse Lotus
+            skillName[index] = "Reverse Lotus (Ura Renge)";
+            break;
+    }
+    skillCount++;
+}
+
+void AddBattleSkill(int battleSkill) {
+    if(battleSkillCount >= MAX_BATTLE_SKILLS) return; 
+    int index = battleSkillCount;
+    id[index] = battleSkill;
+    cooldownLeft[index] = 0;
+    
+    switch(battleSkill) {   
+        case 1: // Kei-ga-n Barrage
             name[index] = "Kei-ga-n Barrage";
             epCost[index] = 12;
             cooldownMax[index] = 2;
             requiresGate[index] = false;
-            g2Only[index] = false;
             requiresChains[index] = false;
-            srequiresFrontLotusUsed[index] = false;
+            requiresFrontLotusUsed[index] = false;
             hits[index] = 3;
             atkMultiplier[index] = 0.45;
             endPierceFactor[index] = 0.05;
@@ -627,59 +646,27 @@ void AddSkill(int skillId) {
             disarmsKiribachi[index] = false;
             break;
             
-        case 4: // Front Lotus
+        case 2: // Front Lotus
             name[index] = "Front Lotus (Omote Renge)";
             epCost[index] = 13;
             cooldownMax[index] = 0;
             requiresGate[index] = true;
-            g2Only[index] = false;
             requiresChains[index] = true;
-            srequiresFrontLotusUsed[index] = false;
+            requiresFrontLotusUsed[index] = false;
             hits[index] = 2;
             atkMultiplier[index] = 0.95;
             endPierceFactor[index] = 0.30;
             appliedStagger[index] = true;
             disarmsKiribachi[index] = true;
             break;
-        
-        case 5: // Gate of Opening - Mastery (Passive)
-            name[index] = "Gate of Opening - Mastery";
-            epCost[index] = 0;
-            cooldownMax[index] = 0;
-            requiresGate[index] = false;
-            g2Only[index] = false;
-            requiresChains[index] = false;
-            srequiresFrontLotusUsed[index] = false;
-            hits[index] = 0;
-            atkMultiplier[index] = 0;
-            endPierceFactor[index] = 0;
-            appliedStagger[index] = false;
-            disarmsKiribachi[index] = false;
-            break;
-
-        case 6: // Gate of Healing
-            name[index] = "Gate of Healing (G2)";
-            epCost[index] = G2_CAST_COST;
-            cooldownMax[index] = 0;
-            requiresGate[index] = false;
-            g2Only[index] = false;
-            requiresChains[index] = false;
-            srequiresFrontLotusUsed[index] = false;
-            hits[index] = 0;
-            atkMultiplier[index] = 2.2;
-            endPierceFactor[index] = 0;
-            appliedStagger[index] = false;
-            disarmsKiribachi[index] = false;
-            break;
             
-        case 7: // Chain Barrage
+        case 3: // Chain Barrage
             name[index] = "Chain Barrage";
             epCost[index] = 14;
             cooldownMax[index] = 2;
             requiresGate[index] = false;
-            g2Only[index] = false;
             requiresChains[index] = true;
-            srequiresFrontLotusUsed[index] = false;
+            requiresFrontLotusUsed[index] = false;
             hits[index] = 3;
             atkMultiplier[index] = 0.5;
             endPierceFactor[index] = 0.10;
@@ -687,14 +674,13 @@ void AddSkill(int skillId) {
             disarmsKiribachi[index] = false;
             break;
             
-        case 8: // Reverse Lotus
+        case 4: // Reverse Lotus
             name[index] = "Reverse Lotus (Ura Renge)";
             epCost[index] = 25;
             cooldownMax[index] = 5;
             requiresGate[index] = true;
-            g2Only[index] = false;
             requiresChains[index] = false;
-            srequiresFrontLotusUsed[index] = true;
+            requiresFrontLotusUsed[index] = true;
             hits[index] = 4;
             atkMultiplier[index] = 1.25;
             endPierceFactor[index] = 0.35;
@@ -702,8 +688,7 @@ void AddSkill(int skillId) {
             disarmsKiribachi[index] = false;
             break;
     }
-    
-    skillCount++;
+    battleSkillCount++;
 }
 
 void BattleLoop() {
@@ -713,6 +698,7 @@ void BattleLoop() {
         turnNumber++;
         Border();
         cout << "\n TURN " << turnNumber << " \n\n";
+        if(turnNumber == 3) isTurnThree = true;
         
         // Display Status
         cout << "KEIGAN: HP=" << playerHP_current << "/" << playerHP_max;
@@ -832,13 +818,13 @@ void PlayerActionMenu(bool &turnEnded) {
         turnEnded = true; 
     } else if(choice == 2) {
         // Use Skill
-        if(skillCount == 0) {
+        if(battleSkillCount == 0) {
             cout << "\nNo skills available!\n";
             return;
         }
         
         cout << "\nAvailable Skills:\n";
-        for(int i = 0; i < skillCount; i++) {
+        for(int i = 0; i < battleSkillCount; i++) {
             cout << (i+1) << ". " << name[i];
             cout << " (EP: " << epCost[i] << ")";
             if(cooldownLeft[i] > 0) {
@@ -849,149 +835,93 @@ void PlayerActionMenu(bool &turnEnded) {
         cout << "0. Cancel\n";
         cout << "Select skill: ";
         
-        int skillChoice = GetValidChoice();
+        int battleSkillChoice = GetValidChoice();
         
-        if(skillChoice == 0) {
+        if(battleSkillChoice == 0) {
             return;
         }
         
-        if(skillChoice < 1 || skillChoice > skillCount) {
+        if(battleSkillChoice < 1 || battleSkillChoice > battleSkillCount) {
             cout << "\nInvalid skill selection.\n";
             return;
         }
         
-        UseSkill(skillChoice - 1, turnEnded);
+        cout << "\n";
+        UseSkill(battleSkillChoice - 1, turnEnded);
         
     } else if(choice == 3) {
         // Toggle Gate
-        if(gateEndDebuff) {
-            cout << "\nCannot activate Gate - Gate End Debuff is active!\n";
-            cout << "Recover more EP to remove the debuff.\n";
-            return;
-        }
-        
-        if(gateState == 0) {
-            // Activate G1
-            int cost = hasGateMastery ? G1_CAST_COST_MASTERY : G1_CAST_COST;
-            if(playerEP_current >= cost) {
-                playerEP_current -= cost;
-                gateState = 1;
-                cout << "\n[GATE OF OPENING ACTIVATED!]\n";
-                cout << "[ATK multiplied by 1.8!]\n";
+        if(isTurnThree) {
+            if(gateEndDebuff) {
+                cout << "\nCannot activate Gate - Gate End Debuff is active!\n";
+                cout << "Recover more EP to remove the debuff.\n";
+                return;
+            }
+            if(gateState == 0) {
+                // Activate G1
+                int cost = hasGateMastery ? G1_CAST_COST_MASTERY : G1_CAST_COST;
+                if(playerEP_current >= cost) {
+                    playerEP_current -= cost;
+                    gateState = 1;
+                    cout << "\n[GATE OF OPENING ACTIVATED!]\n";
+                    cout << "[ATK multiplied by 1.8!]\n";
+                    turnEnded = true;
+                } else {
+                    cout << "\nNot enough EP! Need " << cost << " EP.\n";
+                }
+            } else if(gateState == 1 && hasGateMastery) {
+                // Upgrade to G2
+                if(playerEP_current >= G2_SWITCH_COST) {
+                    playerEP_current -= G2_SWITCH_COST;
+                    gateState = 2;
+                    cout << "\n[GATE OF HEALING ACTIVATED!]\n";
+                    cout << "[ATK multiplied by 2.2!]\n";
+                    turnEnded = true;
+                } else {
+                    cout << "\nNot enough EP! Need " << G2_SWITCH_COST << " EP to switch.\n";
+                }
+            } else if(gateState >= 1) {
+                // Close Gate
+                cout << "\n[CLOSING GATE...]\n";
+                EndGate();
                 turnEnded = true;
             } else {
-                cout << "\nNot enough EP! Need " << cost << " EP.\n";
+                cout << "\nInvalid choice.\n";
             }
-        } else if(gateState == 1 && hasGateMastery) {
-            // Upgrade to G2
-            if(playerEP_current >= G2_SWITCH_COST) {
-                playerEP_current -= G2_SWITCH_COST;
-                gateState = 2;
-                cout << "\n[GATE OF HEALING ACTIVATED!]\n";
-                cout << "[ATK multiplied by 2.2!]\n";
-                turnEnded = true;
-            } else {
-                cout << "\nNot enough EP! Need " << G2_SWITCH_COST << " EP to switch.\n";
-            }
-        } else if(gateState >= 1) {
-            // Close Gate
-            cout << "\n[CLOSING GATE...]\n";
-            EndGate();
-            turnEnded = true;
+        } else {
+            cout << "\nGates can only be toggled starting from Turn 3.\n\n";
         }
-        
-    } else {
-        cout << "\nInvalid choice.\n";
     }
 }
 
 void UseSkill(int skillIndex, bool &turnEnded) {
      // Check cooldown
     if(cooldownLeft[skillIndex] > 0) {
-        cout << "\nSkill is on cooldown! Wait " << cooldownLeft[skillIndex] << " more turns.\n";
+        cout << "\nSkill is on cooldown! Wait " << cooldownLeft[skillIndex] << " more turns.\n\n";
         return;
     }
     
     // Check EP
     if(playerEP_current < epCost[skillIndex]) {
-        cout << "\nNot enough EP! Need " << epCost[skillIndex] << " EP.\n";
+        cout << "\nNot enough EP! Need " << epCost[skillIndex] << " EP.\n\n";
         return;
     }
     
     // Check Gate requirement
     if(requiresGate[skillIndex] && gateState == 0) {
-        cout << "\nThis skill requires a Gate to be active!\n";
-        return;
-    }
-    
-    // Check G2 requirement
-    if(g2Only[skillIndex] && gateState != 2) {
-        cout << "\nThis skill requires Gate of Healing (G2) to be active!\n";
+        cout << "\nThis skill requires a Gate to be active!\n\n";
         return;
     }
     
     // Check Chain requirement
     if(requiresChains[skillIndex] && !hasChainHandling) {
-        cout << "\nThis skill requires Chain Handling!\n";
+        cout << "\nThis skill requires Chain Handling!\n\n";
         return;
     }
     
     // Check Front Lotus requirement
-    if(srequiresFrontLotusUsed[skillIndex] && !hasFrontLotusUsed) {
-        cout << "\nThis skill requires Front Lotus to be used first!\n";
-        return;
-    }
-    
-    // Special handling for Gates
-    if(id[skillIndex] == 1) {
-        // Gate of Opening
-        int cost = hasGateMastery ? G1_CAST_COST_MASTERY : G1_CAST_COST;
-        if(playerEP_current >= cost) {
-            playerEP_current -= cost;
-            gateState = 1;
-            cout << "\n[GATE OF OPENING ACTIVATED!]\n";
-            cout << "[ATK multiplied by 1.8!]\n";
-            turnEnded = true;
-        } else {
-            cout << "\nNot enough EP!\n";
-        }
-        return;
-    }
-    
-    if(id[skillIndex] == 6) {
-        // Gate of Healing
-        if(gateState == 1) {
-            if(playerEP_current >= G2_SWITCH_COST) {
-                playerEP_current -= G2_SWITCH_COST;
-                gateState = 2;
-                cout << "\n[GATE OF HEALING ACTIVATED!]\n";
-                cout << "[ATK multiplied by 2.2!]\n";
-                turnEnded = true;
-            } else {
-                cout << "\nNot enough EP to switch gates!\n";
-            }
-        } else if(gateState == 0) {
-            if(playerEP_current >= G2_CAST_COST) {
-                playerEP_current -= G2_CAST_COST;
-                gateState = 2;
-                cout << "\n[GATE OF HEALING ACTIVATED!]\n";
-                cout << "[ATK multiplied by 2.2!]\n";
-                turnEnded = true;
-            } else {
-                cout << "\nNot enough EP!\n";
-            }
-        }
-        return;
-    }
-    
-    // Passive skill (Chain Handling)
-    if(id[skillIndex] == 2) {
-        cout << "\nChain Handling is a passive skill.\n";
-        return;
-    }
-
-    if(id[skillIndex] == 5) {
-        cout << "\nGate of Opening - Mastery is a passive skill.\n";
+    if(requiresFrontLotusUsed[skillIndex] && !hasFrontLotusUsed) {
+        cout << "\nThis skill requires Front Lotus to be used first!\n\n";
         return;
     }
     
@@ -1004,9 +934,9 @@ void UseSkill(int skillIndex, bool &turnEnded) {
     int effectiveHits = hits[skillIndex];
     
     // Add bonus hit for Reverse Lotus with G2
-    if(id[skillIndex] == 8 && gateState == 2) {
+    if(id[skillIndex] == 4 && gateState == 2) {
         effectiveHits++;
-        cout << "[G2 Bonus: +1 hit!]\n";
+        cout << "[G2 Bonus: +1 hit!]\n\n";
     }
     
     // Calculate damage per hit
@@ -1032,7 +962,7 @@ void UseSkill(int skillIndex, bool &turnEnded) {
     }
     
     // Mark Front Lotus as used
-    if(id[skillIndex] == 4) {
+    if(id[skillIndex] == 2) {
         hasFrontLotusUsed = true;
     }
     
@@ -1088,8 +1018,8 @@ void EndGate() {
     playerEND = ceil(playerEND / crashDivisor);
     
     cout << "[GATE CRASH PENALTY!]\n";
-    cout << "[ATK: " << originalATK << " -> " << playerATK << " (÷" << crashDivisor << ")]\n";
-    cout << "[END: " << originalEND << " -> " << playerEND << " (÷" << crashDivisor << ")]\n";
+    cout << "[ATK: " << originalATK << " -> " << playerATK << " (/" << crashDivisor << ")]\n";
+    cout << "[END: " << originalEND << " -> " << playerEND << " (/" << crashDivisor << ")]\n";
     cout << "[Effect lasts 1 turn]\n";
     
     // Apply Gate End Debuff
@@ -1134,7 +1064,7 @@ void ApplyDamage(double atkMult, double endPierce, int &damageDealt) {
 
 void TickCooldownsAndStatuses() {
     // Tick cooldowns
-    for(int i = 0; i < skillCount; i++) {
+    for(int i = 0; i < battleSkillCount; i++) {
         if(cooldownLeft[i] > 0) {
             cooldownLeft[i]--;
         }
